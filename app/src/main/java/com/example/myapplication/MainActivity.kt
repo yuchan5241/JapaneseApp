@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.Button
 import androidx.compose.material3.HorizontalDivider
@@ -47,8 +48,8 @@ class MainActivity : ComponentActivity() {
                     ){
                         Row(
                             modifier = Modifier
-                                .fillMaxWidth()
                         ) {
+                            ->
                             OutlinedTextField(
                                 value = name,
                                 onValueChange = { text ->
@@ -56,7 +57,7 @@ class MainActivity : ComponentActivity() {
                                     },
                                 modifier = Modifier.weight(1f)
                             )
-                            Spacer(modifier = Modifier.width(16.dp))
+                            Spacer(modifier = Modifier.width(10.dp))
                             Button(onClick = {
                                 if(name.isNotBlank()){
                                     names = names + name
@@ -66,8 +67,9 @@ class MainActivity : ComponentActivity() {
                                 Text(text = "Add")
                             }
 
-                            NameList(names = names)
+
                         }
+                        NameList(names = names)
 
                     }
 
