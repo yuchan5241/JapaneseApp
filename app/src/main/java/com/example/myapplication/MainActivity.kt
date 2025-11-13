@@ -15,6 +15,8 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.layout.wrapContentHeight
+import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyRow
 import androidx.compose.foundation.lazy.items
@@ -50,20 +52,24 @@ class MainActivity : ComponentActivity() {
             MyApplicationTheme {
                     var invisible by remember {mutableStateOf(0f)}
                     Column(
-                        verticalArrangement = Arrangement.Bottom,
-                        horizontalAlignment = Alignment.CenterHorizontally
-
+                        verticalArrangement = Arrangement.SpaceAround,
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        modifier = Modifier.fillMaxSize() //그냥 위치 조정하면 화면에서 중앙이 아닌 column 내부 중앙으로 적용
                     ){
-                        invisible = BasicSlider()
+
                         Image(
                             painter = painterResource(id = R.drawable.barze),
                             contentDescription = null,
-                            modifier = Modifier,
+                            modifier = Modifier
+                                .size(500.dp,500.dp),
                             alpha = invisible/100f)
                         Text(text="내 마음이야",
                             fontSize = 80.sp,
                             color = Color.Red,
+                            modifier = Modifier
+                                .wrapContentHeight(align = Alignment.Top)
                             )
+                        invisible = BasicSlider()
 
                     }
 
@@ -75,13 +81,12 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun BasicSlider(): Float{
     var sliderPosition by remember { mutableStateOf(0f)}
-
     Column(
-        modifier = Modifier.padding(16.dp),
+        modifier = Modifier.padding(16.dp)
     ) {
         Slider(
             value = sliderPosition,
-            onValueChange = {sliderPosition = it},
+            onValueChange = { sliderPosition = it },
             valueRange = 0f..100f
         )
     }
